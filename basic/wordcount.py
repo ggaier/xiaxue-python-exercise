@@ -51,8 +51,14 @@ def print_words(filename):
   for word in sorted(words_dict):
     print word, words_dict[word]
 
+def tuple_value(tuple):
+  return tuple[-1]
+
 def print_top(filename):
-  return
+  words_dict = filehelper.word_counts(filename)
+  word_tuples = sorted(words_dict.items(), key = tuple_value, reverse = True)[:20]
+  for word in word_tuples:
+    print word[0], word[1]
 ###
 
 # This basic command line argument parsing code is provided and
