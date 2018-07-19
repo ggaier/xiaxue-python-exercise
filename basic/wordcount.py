@@ -38,6 +38,7 @@ print_words() and print_top().
 """
 
 import sys
+import filehelper
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
@@ -45,6 +46,13 @@ import sys
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 
+def print_words(filename):
+  words_dict = filehelper.word_counts(filename)
+  for word in sorted(words_dict):
+    print word, words_dict[word]
+
+def print_top(filename):
+  return
 ###
 
 # This basic command line argument parsing code is provided and
