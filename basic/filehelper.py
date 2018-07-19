@@ -11,6 +11,7 @@ def word_counts(filename):
             word_counts[char]+=1
         else:
             word_counts[char] =1
+    f.close()
     return word_counts
 
 
