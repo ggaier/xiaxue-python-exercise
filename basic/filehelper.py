@@ -3,6 +3,7 @@
 import sys
 def word_counts(filename):
     f = open(filename, 'rU')
+    #不要一次性读完一整个文件, 一次读一行
     online_file = f.read()
     online_file.lower()
     word_counts = {}
