@@ -18,7 +18,22 @@ import commands
 # +++your code here+++
 # Write functions and modify main() to call them
 
+def get_spacial_paths(dir):
+  result = []
+  filenames = os.listdir(dir)
+  for filename in filenames:
+    match = re.search(r'__(\w+)__', filename)
+    if match: 
+      print filename
+      result.append(os.path.abspath(os.path.join(dir, filename)))
+  return result
 
+def copy_to(source_files, destination):
+  if not os.path.exists(destination):
+    os.mkdir(destination)
+  for source_file in source_files:
+    base_name = os.path.basename(source_file)
+    shutil.copy(source_file, os.path.join(destination, base_name))
 
 def main():
   # This basic command line argument parsing code is provided.
@@ -48,6 +63,18 @@ def main():
   if len(args) == 0:
     print "error: must specify one or more dirs"
     sys.exit(1)
+
+  source_files = []
+  for path in args:
+    source_files.extend(get_spacial_paths(path))
+
+  if todir:
+    copy_to(source_files, todir)
+  elif tozip:
+    print "tozip"
+  else: 
+    print "\n".join(source_files)
+
 
   # +++your code here+++
   # Call your functions
