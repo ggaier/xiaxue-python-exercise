@@ -35,6 +35,16 @@ def copy_to(source_files, destination):
     base_name = os.path.basename(source_file)
     shutil.copy(source_file, os.path.join(destination, base_name))
 
+def zip_to(source_files, zipfile):
+  command = 'zip -j '+zipfile+' '+' '.join(source_files)
+  print 'zip command: '+command
+  (status, output) = commands.getstatusoutput(command)
+  if status:
+    sys.stderr.write(output)
+    sys.exit(1)
+
+
+
 def main():
   # This basic command line argument parsing code is provided.
   # Add code to call your functions below.
@@ -71,7 +81,7 @@ def main():
   if todir:
     copy_to(source_files, todir)
   elif tozip:
-    print "tozip"
+    zip_to(source_files, tozip)
   else: 
     print "\n".join(source_files)
 
