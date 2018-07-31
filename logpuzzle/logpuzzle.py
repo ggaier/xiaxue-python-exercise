@@ -37,7 +37,7 @@ def read_urls(filename):
         matched_url_dict['http://'+host+path]=1
   sorted_urls = sorted(matched_url_dict.keys())
   print "\n".join(sorted_urls)
-  return sorted
+  return sorted_urls
 
   
 
@@ -50,8 +50,19 @@ def download_images(img_urls, dest_dir):
   Creates the directory if necessary.
   """
   # +++your code here+++
-  
-  
+  if not os.path.exists(dest_dir):
+    os.mkdir(dest_dir)
+  index_file = file(os.path.join(dest_dir, 'index.html'), 'w')
+  index_file.write('<html><body>\n')
+  i = 0
+  for image_url in img_urls:
+    local_name = 'img%d' % i
+    print 'Retrieving ...', image_url
+    urllib.urlretrieve(image_url, os.path.join(dest_dir, local_name))
+    index_file.write('<img src = "%s"/>' % (local_name, ) )
+    i+=1
+  index_file.write('</body></html>\n')
+  index_file.close()
 
 def main():
   args = sys.argv[1:]
