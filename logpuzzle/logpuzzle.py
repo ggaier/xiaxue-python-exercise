@@ -56,7 +56,7 @@ def download_images(img_urls, dest_dir):
   index_file.write('<html><body>\n')
   i = 0
   for image_url in img_urls:
-    local_name = 'img%d' % i
+    local_name = 'img%d.jpg' % i
     print 'Retrieving ...', image_url
     urllib.urlretrieve(image_url, os.path.join(dest_dir, local_name))
     index_file.write('<img src = "%s"/>' % local_name )
