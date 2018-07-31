@@ -25,6 +25,20 @@ def read_urls(filename):
   Screens out duplicate urls and returns the urls sorted into
   increasing order."""
   # +++your code here+++
+  host = filename[filename.index('_')+1:]
+  file = open(filename)
+  # to avoid duplicate urls
+  matched_url_dict = {}
+  for line in file:
+    match = re.search(r'"GET (\S+)', line)
+    if match:
+      path = match.group(1)
+      if 'puzzle' in path:
+        matched_url_dict['http://'+host+path]=1
+  sorted_urls = sorted(matched_url_dict.keys())
+  print "\n".join(sorted_urls)
+  return sorted
+
   
 
 def download_images(img_urls, dest_dir):
@@ -36,6 +50,7 @@ def download_images(img_urls, dest_dir):
   Creates the directory if necessary.
   """
   # +++your code here+++
+  
   
 
 def main():
